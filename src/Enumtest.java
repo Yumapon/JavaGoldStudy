@@ -4,7 +4,7 @@ public enum Enumtest {
      * ※メソッド内では宣言できない。
      */
     
-     SPADES, CLUBS, DIAMONDS, HEARTS
+     SPADES, CLUBS, DIAMONDS, HEARTS;
      /**
       * ↓上記はこんな感じのソースイメージ
       final class Enumtest extends java.lang.Enum<Enumtest> { ⇦自動でextendsされるので、他の型を継承できない。
@@ -26,4 +26,22 @@ public enum Enumtest {
         static{}
       }
       */
+
+      //フィールド
+      String name;
+
+      //コンストラクタ
+      Enumtest(){
+        this.name = "init";
+      }
+
+      private Enumtest(String name){
+        this.name = name;
+      }
+
+      //メソッド
+      public String get() {
+        return name;
+      }
+      
 }
