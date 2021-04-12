@@ -206,6 +206,70 @@ public class CollectionSample {
         for(Employee e : list3){
             System.out.println(e.getId() + " : " + e.getName());
         }
+
+        /**
+         * Collectionクラスで遊んでみる
+         */
+        System.out.println("/**");
+        System.out.println(" * Collectionクラスで遊んでみる");
+        System.out.println(" */");
+
+        //コレクション作成
+        List<Animal> list4 = new ArrayList<>();
+
+        //要素の追加
+        list4.add(new CollectionSample.Animal(130, "うさぎ"));
+        list4.add(new CollectionSample.Animal(30, "人間"));
+        list4.add(new CollectionSample.Animal(5, "かめ"));
+        list4.add(new CollectionSample.Animal(90, "狐"));
+        list4.add(new CollectionSample.Animal(45, "ゴリラ"));
+
+        //要素の確認
+        System.out.println("------整列前------");
+        for(Animal a : list4){
+            System.out.println(a.getSeed() + " : " + a.getSpeed());
+        }
+
+        //ソート(CompalableI/Fで実装したメソッドcompareToでソートする)
+        System.out.println("------整列(Comparable)------");
+        Collections.sort(list4, new SpeedCheckRule());
+        for(Animal a : list4){
+            System.out.println(a.getSeed() + " : " + a.getSpeed());
+        }
+
+        //reverse
+        System.out.println("------逆順に並び替え------");
+        Collections.reverse(list4);
+        for(Animal a : list4){
+            System.out.println(a.getSeed() + " : " + a.getSpeed());
+        }
+
+        /**
+         * Arraysクラスで遊んでみる
+         */
+        System.out.println("/**");
+        System.out.println(" * Arraysクラスで遊んでみる");
+        System.out.println(" */");
+
+        //まずはArraysで配列をリストにしてみる
+        Integer[] integers = {3, 1, 2};
+        List<Integer> list5 = Arrays.asList(integers);
+
+        System.out.println("------配列をリスト化------");
+        for(Integer i : list5){
+            System.out.print(i);
+        }
+        System.out.println();
+
+        //配列をソートする
+        Arrays.sort(integers);
+        System.out.println("------配列をソート-----");
+        for(Integer i : list5){
+            System.out.print(i);
+        }
+        System.out.println();
+
+
     }
 
     //Comparator用サンプルクラス
@@ -227,6 +291,44 @@ public class CollectionSample {
         @Override
         public int compare(CollectionSample.Employee o1, CollectionSample.Employee o2) {
             return o1.getId().compareTo(o2.getId());//結局、Integer型の比較メソッドを使用
+        }
+    }
+
+    //遊び用クラス
+    public static class Animal implements Comparable<CollectionSample.Animal>{
+
+        //フィールド
+        private int speed;
+        private String seed;
+
+        //コンストラクタ
+        Animal (int i, String str){
+            this.speed = i;
+            this.seed = str;
+        }
+
+        //getter
+        public int getSpeed() {return speed;}
+        public String getSeed() {return seed;}
+
+        //比較メソッド
+        @Override
+        public int compareTo(Animal animal) {
+            //speedが早いなら、正を、遅いなら負を、同じなら0を
+            if(this.speed > animal.getSpeed()) return -1;
+            else if(this.speed < animal.getSpeed()) return 1;
+            else return 0;
+        }
+        
+    }
+
+    //比較クラス
+    public static class SpeedCheckRule implements Comparator<Animal>{
+
+        @Override
+        public int compare(Animal o1, Animal o2) {
+            //speedが早いなら、正を、遅いなら負を、同じなら0を
+            return o1.compareTo(o2);
         }
     }
 }

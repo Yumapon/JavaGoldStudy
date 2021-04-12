@@ -118,7 +118,7 @@ public class Lambda {
 
     /**
      * 当然これもBiConsumer<T,U>
-     * 引数２、戻り値なしとかがある
+     * 引数２、戻り値なし
      */
     public void biconsumertest(){
       BiConsumer<String, Integer> buyer2 = (goods, i) -> {System.out.println(goods + "を" + i + "個購入しました");};

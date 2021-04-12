@@ -1,0 +1,1167 @@
+Java SE 8 Programmer II (1Z0-809) サンプル問題
+問題1:
+次のコードを確認してください。
+
+class OutOfInkException extends Exception { }
+
+ 
+
+class Pen {
+
+void write() throws OutOfInkException { }
+
+protected void refillInk() throws Exception { }
+
+}
+
+ 
+
+class BallpointPen extends Pen {
+
+private void write() throws OutOfInkException { } // line 1
+
+public void refillInk() { } // line 2
+
+}
+
+ 
+
+public class Test {
+
+public static void main(String[] args) throws Exception {
+
+Pen p = new BallpointPen();
+
+p.write();
+
+p.refillInk();
+
+}
+
+}
+
+ 
+
+このコードを実行すると、どのような結果になりますか。
+
+1.        line 1が原因でコンパイルに失敗する。
+
+2.        line 2が原因でコンパイルに失敗する。
+
+3.        line 1と line 2が原因でコンパイルに失敗する。
+
+4.        コンパイルは正常に成功するが、実行時例外が発生する。
+
+5.        コンパイル、実行ともに問題なく成功する。
+
+ 
+
+
+問題2:
+次のコードを確認してください。
+
+ 
+
+class Car {
+
+int cno;
+
+String name;
+
+
+public Car(int cno, String name) {
+
+this.cno = cno;
+
+this.name = name;
+
+}
+
+
+public boolean equals(Object obj) {
+
+if (obj == null) { return false; }
+
+
+Car other = (Car) obj;
+
+
+if (this.name.equals(other.name)) {
+
+return true;
+
+} else {
+
+return false;
+
+}
+
+}
+
+}
+
+ 
+
+public class Test {
+
+public static void main(String[] args) {
+
+Car c1 = new Car(1234, "Taxi");
+
+Car c2 = c1;
+
+Car c3 = new Car(9876, "Taxi");
+
+
+System.out.println(c1.equals(c2));
+
+System.out.println(c1 == c2);
+
+System.out.println(c1.equals(c3));
+
+System.out.println(c1 == c3);
+
+}
+
+}
+
+ 
+
+このコードを実行すると、trueはいくつ表示されますか。
+
+ 
+
+1.        1つ
+
+2.        2つ
+
+3.        3つ
+
+4.        4つ
+
+問題3:
+次のコードを確認してください。
+
+ 
+
+interface Movable {
+
+void walk();
+
+}
+
+ 
+
+abstract class Machine { }
+
+ 
+
+class Robot extends Machine implements Movable {
+
+void walk() { }
+
+}
+
+ 
+
+final class Accounts {
+
+public static void expire();
+
+}
+
+ 
+
+class Ship {
+
+public void depart() {
+
+class Anchor { }
+
+}
+
+}
+
+ 
+
+正常にコンパイルができるクラスは、どれですか。
+
+ 
+
+1.        Machineのみ
+
+2.        Robotのみ
+
+3.        MachineとRobot
+
+4.        MachineとShip
+
+5.        RobotとAcounts
+
+6.        RobotとShip
+
+ 
+
+ 
+
+
+問題4:
+次のコードを確認してください。
+
+ 
+
+interface ParentIF {
+
+void parentMetnod();
+
+}
+
+ 
+
+@FunctionalInterface
+
+interface FuncIF { // line 1
+
+public default void method() { } // line 2
+
+// line 3
+
+}
+
+ 
+
+FuncIFインタフェースを正常にコンパイルするために必要な修正はどれですか？
+
+ 
+
+1.        line 1を以下のように修正する。
+
+interface FuncIF extends ParentIF {
+
+2.        line 2をコメントアウトする。
+
+3.        line 3に以下のコードを挿入する。
+
+public static void classMethod() { }
+
+4.        line 3に以下のコードを挿入する。
+
+public boolean equals(Object obj);
+
+ 
+
+
+ 
+
+問題5:
+次のコードを確認してください。
+
+ 
+
+Deque<Integer> nums = new ArrayDeque<>();
+
+ 
+
+nums.push(10);
+
+nums.add(20);
+
+nums.push(30);
+
+ 
+
+System.out.println(nums.remove());
+
+System.out.println(nums.pop());
+
+System.out.println(nums);
+
+ 
+
+このコードをコンパイル、実行すると何が出力されますか。
+
+ 
+
+1.        30
+
+10
+
+[20]
+
+2.        30
+
+10
+
+[10, 20]
+
+3.        10
+
+20
+
+[30]
+
+4.        10
+
+20
+
+[20, 30]
+
+ 
+
+ 
+
+
+問題6:
+次のコードを確認してください。
+
+ 
+
+class Shoes {
+
+private String color;
+
+
+public Shoes(String color) { this.color = color; }
+
+public String getColor() { return color; }
+
+}
+
+ 
+
+public class Test {
+
+public static void main(String[] args) {
+
+List<Shoes> sList = Arrays.asList(
+
+new Shoes("Blue"),
+
+new Shoes("Red"),
+
+new Shoes("Green")
+
+);
+
+
+Stream<Shoes> ss = sList.stream();
+
+// line 1
+
+System.out.println(count);
+
+}
+
+}
+
+ 
+
+このコードをコンパイル、実行して2が表示されるようにするには、どのコードをline 1に挿入しますか。
+
+ 
+
+1.        long count = ss.map(s -> s.length() > 3)
+
+.count();
+
+2.        long count = ss.map(s -> s.getColor())
+
+.peek(s -> s.length() > 3)
+
+.count();
+
+3.        long count = ss.map(Shoes::getColor)
+
+.filter(s -> s.length() > 3)
+
+.count();
+
+4.        long count = ss.map(s -> s.getColor().subSequence(0,1))
+
+.count();
+
+ 
+
+
+問題7:
+次のコードを確認してください。
+
+ 
+
+List<Integer> list = Arrays.asList(3, 3, 3, null); // line 1
+
+ 
+
+Function<Integer, Integer> func = i -> i; // line 2
+
+ 
+
+Double avg = // line 3
+
+list.stream()
+
+.mapToInt(func) // line 4
+
+.average(); // line 5
+
+
+System.out.println(avg);
+
+ 
+
+このコードをコンパイル、実行して3.0と表示するために必要な修正はどれですか。（３つ選択してください）
+
+ 
+
+1.        line 1を以下のように書き換える。
+
+List<Integer> list = Arrays.asList(3, 3, 3, 3);
+
+2.        line 2を以下のように書き換える。
+
+ToIntFunction<Integer> func = i -> i;
+
+3.        line 3を以下のように書き換える。
+
+double avg =
+
+4.        line 4を以下のように書き換える。
+
+.map(func)
+
+5.        line 5を以下のように書き換える。
+
+.average().orElse(0.0);
+
+ 
+
+
+問題8:
+次のコードを確認してください。
+
+ 
+
+BiFunction<String, Double, Integer> bf = (s, d) -> s.length() * d; // line 1
+
+System.out.println(bf.apply("Java", 0.5)); // line 2
+
+ 
+
+このコードをコンパイル、実行すると何が出力されますか。
+
+ 
+
+1.        2
+
+2.        2.0
+
+3.        line 1でコンパイルエラーが発生する。
+
+4.        line 2でコンパイルエラーが発生する。
+
+ 
+
+ 
+
+
+問題9:
+次のコードを確認してください。
+
+ 
+
+Optional<String> str = Optional.of(null); // line 1
+
+System.out.println(str.orElse(null)); // line 2
+
+System.out.println(str.get()); // line 3
+
+System.out.println(str.isPresent()); // line 4
+
+str.ifPresent(System.out::println); // line 5
+
+ 
+
+このコードをコンパイルして実行したとき、どの行で実行時エラーが発生しますか。（最初に発生する行を選択してください）
+
+ 
+
+1.        line 1
+
+2.        line 2
+
+3.        line 3
+
+4.        line 4
+
+5.        line 5
+
+ 
+
+
+問題10:
+次のコードを確認してください。
+
+ 
+
+class City {
+
+String name;
+
+int ward;
+
+
+public City(String name, int ward) {
+
+this.name = name;
+
+this.ward = ward;
+
+}
+
+
+public String getName() { return name; }
+
+public int getWard() { return ward; }
+
+public String toString() { return name + ":" + ward; }
+
+}
+
+ 
+
+public class Test {
+
+public static void main(String[] args) {
+
+List<City> cities = Arrays.asList(
+
+new City("Yokohama", 18),
+
+new City("Hamamatsu", 7),
+
+new City("Nagoya", 16),
+
+new City("Fukuoka", 7)
+
+);
+
+
+cities.stream().sorted(
+
+Comparator.comparing(City::getWard)
+
+.thenComparing(City::getName)
+
+.reversed()
+
+).forEach(System.out::println);
+
+}
+
+}
+
+ 
+
+このコードをコンパイル、実行すると何が出力されますか。
+
+ 
+
+1.        コンパイルエラーが発生する。
+
+2.        Fukuoka:7
+
+Hamamatsu:7
+
+Nagoya:16
+
+Yokohama:18
+
+3.        Yokohama:18
+
+Nagoya:16
+
+Fukuoka:7
+
+Hamamatsu:7
+
+4.        Yokohama:18
+
+Nagoya:16
+
+Hamamatsu:7
+
+Fukuoka:7
+
+ 
+
+
+問題11:
+次のコードを確認してください。
+
+ 
+
+class TextResource implements Closeable { // line 1
+
+public void close() throws IOException { }
+
+}
+
+ 
+
+public class Test {
+
+public static void main(String[] args) {
+
+TextResource tr; // line 2
+
+
+try (tr = new TextResource()) { // line 3
+
+// line 4
+
+} catch (IOException e) { }
+
+// line 5
+
+}
+
+}
+
+ 
+
+このコードをコンパイル、実行するために必要な修正はどれですか？
+
+ 
+
+1.        line 1を以下のように変更する。
+
+class TextResource implements AutoCloseable {
+
+2.         
+
+line 2を削除し、line 3を以下のように変更する。
+
+try (TextResource tr = new TextResource()) {
+
+3.        line 4に以下のコードを挿入する。
+
+tr.close();
+
+4.        line 5に以下のコードを挿入する。
+
+finally { tr.close(); }
+
+ 
+
+ 
+
+ 
+
+
+問題12:
+2017年は、マドリッド（スペイン）の夏時間は3月26日の午前2時に始まります。この結果、午前2時が午前3時になります。
+
+次のコードを確認してください。
+
+ 
+
+ZoneId zid = ZoneId.of("Europe/Madrid");
+
+ 
+
+ZonedDateTime dtFrom = ZonedDateTime.of(
+
+LocalDateTime.of(2017, 3, 26, 0, 0), zid);
+
+
+ZonedDateTime dtTo = dtFrom.plusHours(3);
+
+ 
+
+DateTimeFormatter formatter =
+
+DateTimeFormatter.ofPattern("H:mm - ");
+
+
+System.out.print(formatter.format(dtTo));
+
+ 
+
+System.out.println(
+
+ChronoUnit.HOURS.between(dtFrom, dtTo));
+
+
+このコードを実行すると、どのような結果になりますか。
+
+ 
+
+1.        3:00 - 3
+
+2.        3:00 - 4
+
+3.        4:00 - 3
+
+4.        4:00 - 4
+
+ 
+
+
+問題13:
+次のコードを確認してください。
+
+ 
+
+try (FileInputStream fis = new FileInputStream("Welcome.txt");
+
+InputStreamReader isr = new InputStreamReader(fis);
+
+BufferedReader br = new BufferedReader(isr)) {
+
+
+System.out.print((char) br.read());
+
+br.skip(2);
+
+System.out.print((char) br.read());
+
+br.mark(4);
+
+System.out.print((char) br.read());
+
+br.reset();
+
+System.out.print((char) br.read());
+
+} catch (IOException e) { }
+
+ 
+
+Welcome.txtはアクセス可能で、次のような内容になっているとします。
+
+ 
+
+JavaSE8
+
+ 
+
+このコードを実行すると、どのような結果になりますか。
+
+ 
+
+1.        Java
+
+2.        Jv8v
+
+3.        JaSS
+
+4.        Jaa
+
+ 
+
+ 
+
+
+問題14:
+次のコードを確認してください。
+
+ 
+
+Path file1 = Paths.get("/home/duke/./doc/abc.txt");
+
+Path file2 = Paths.get("/home/duke/doc/xyz.txt");
+
+ 
+
+Path path1 = file2.relativize(file1);
+
+Path path2 = file2.resolve("/web/page.html");
+
+ 
+
+System.out.println(path1.getNameCount());
+
+System.out.println(path2.getNameCount());
+
+ 
+
+このコードを実行すると、どのような結果になりますか。
+
+ 
+
+1.        2
+
+4
+
+2.        2
+
+2
+
+3.        5
+
+4
+
+4.        5
+
+2
+
+ 
+
+ 
+
+
+問題15:
+次のファイルが存在しており、アクセス可能であるとします。
+
+ 
+
+/bucket/brick.txt
+
+/bucket/glass/water.txt
+
+ 
+
+次のコードも確認してください。
+
+ 
+
+Stream<Path> stream1 = Files.list(Paths.get("/bucket"));
+
+stream1.forEach(System.out::println);
+
+ 
+
+Stream<Path> stream2 = Files.walk(Paths.get("/bucket"));
+
+stream2.forEach(System.out::println);
+
+ 
+
+ディレクトリ内にソフト・リンクもシンボリック・リンクもない場合、このコードを実行すると、どのような結果になりますか。
+
+ 
+
+1.        bucket/brick.txt
+
+bucket/glass
+
+bucket/brick.txt
+
+bucket/glass
+
+2.        bucket/brick.txt
+
+bucket/glass
+
+bucket
+
+bucket/brick.txt
+
+bucket/glass
+
+bucket/glass/water.txt
+
+3.        bucket
+
+bucket/brick.txt
+
+bucket/glass
+
+bucket/glass/water.txt
+
+bucket
+
+bucket/brick.txt
+
+bucket/glass
+
+bucket/glass/water.txt
+
+4.        bucket
+
+bucket/brick.txt
+
+bucket/glass
+
+bucket/glass/water.txt
+
+bucket/brick.txt
+
+bucket/glass
+
+ 
+
+ 
+
+ 
+
+問題16:
+次のコードを確認してください。
+
+ 
+
+class CTask implements Callable<String> {
+
+public String call() { return "Hola "; }
+
+}
+
+ 
+
+class RTask implements Runnable {
+
+public void run() { System.out.print("Ciao "); }
+
+}
+
+ 
+
+ExecutorService srv = Executors.newCachedThreadPool();
+
+srv.submit(new CTask()); // line 1
+
+srv.execute(new RTask()); // line 2
+
+srv.shutdown();
+
+ 
+
+Hola Ciaoと表示されるようにするには、どのように修正しますか。
+
+ 
+
+1.        line 1を以下のように修正する。
+
+Future<String> ft = srv.execute(new CTask());
+
+System.out.print(ft.get());
+
+2.        line 1を以下のように修正する。
+
+Future<String> ft = srv.submit(new CTask());
+
+System.out.print(ft.get());
+
+3.        line 1を以下のように修正する。
+
+System.out.println(srv.execute(new CTask()));
+
+4.        line 2を以下のように修正する。
+
+srv.submit(new RTask());
+
+5.        修正の必要はない。
+
+ 
+
+ 
+
+
+問題17:
+次のコードを確認してください。
+
+ 
+
+class Work implements Runnable {
+
+public static AtomicInteger count = new AtomicInteger(0);
+
+
+public void run() { // line 1
+
+count.getAndIncrement(); // line 2
+
+}
+
+}
+
+ 
+
+public class Test {
+
+public static void main(String[] args) throws Exception {
+
+ExecutorService srv = Executors.newCachedThreadPool();
+
+Work wk = new Work();
+
+
+for (int i=0; i<10; i++) {
+
+srv.execute(wk);
+
+}
+
+
+srv.shutdown();
+
+srv.awaitTermination(5, TimeUnit.SECONDS); // line 3
+
+
+System.out.println(Work.count);
+
+}
+
+}
+
+ 
+
+このコードを実行して必ず10と表示されるようにするためには、どのような修正が必要ですか。
+
+ 
+
+1.        line 1を以下のように変更する。
+
+public synchronized void run() {
+
+2.        line 2を以下のように変更する。
+
+count.incrementAndGet();
+
+3.        line 3を削除する。
+
+4.        修正の必要はない。
+
+ 
+
+ 
+
+
+問題18:
+次のようになっているとします。
+
+ 
+
+・必要なデータベース・ドライバはクラスパス内で設定されている。
+
+・dbURL、userNameおよびpassWordでアクセスできる適切なデータベースが存在する。
+
+・Person表には整数型のid列があり、SQL問合せは1つのレコードに一致する。
+
+ 
+
+このとき、次のコードをコンパイルおよび実行すると、どのような結果になりますか。
+
+ 
+
+String query = "SELECT * FROM Person WHERE id = 10";
+
+ 
+
+try (Connection conn = DriverManager.getConnection(URL, userName, passWord);
+
+Statement stmt = conn.createStatement();
+
+ResultSet rs = stmt.executeQuery(query)) {
+
+
+System.out.println(rs.getInt("id")); // line 1
+
+} catch (SQLException ex) {
+
+System.out.println("Fail");
+
+}
+
+ 
+
+1.        10と表示される。
+
+2.        Failと表示される。
+
+3.        何も表示されない。
+
+4.        line 1でコンパイルに失敗する。
+
+ 
+
+
+問題19:
+更新可能なResultSetオブジェクトrsを使用して新規レコードデータを挿入する場合、正しいコードは次のうちどれですか。
+
+ 
+
+1.        rs.moveToInsertRow();
+
+rs.updateInt("id", 35);
+
+rs.updateString("name", "Larry");
+
+rs.insertRow();
+
+2.        rs.moveToInsertRow();
+
+rs.updateInt("id", 35);
+
+rs.updateString("name", "Larry");
+
+rs.updateRow();
+
+3.        rs.moveToInsertRow();
+
+rs.insertInt("id", 35);
+
+rs.insertString("name", "Larry");
+
+rs.insertRow();
+
+4.        rs.insertRow();
+
+rs.insertInt("id", 35);
+
+rs.insertString("name", "Larry");
+
+ 
+
+解答: 1
+
+解説:
+
+JDBCのAPIに関する問題です。
+
+更新可能なResultSetオブジェクトを使用して新規レコードデータを挿入する場合は、以下の手順になります。
+
+１：moveToInsertRowで新規レコードの行に移動する。
+
+２：update系のメソッドで各列に値を設定していく。
+
+３：insertRowメソッドで新規レコードを挿入します。
+
+よって、選択肢１が正解となります。
+
+問題20:
+デフォルトのロケールが、国 ： ドイツ、言語 ： ドイツ語 に設定されているとします。
+
+次のコードを確認してください。
+
+ 
+
+Locale loc;
+
+// line 1
+
+System.out.println(loc);
+
+ 
+
+de_DEと表示されないのは、次のうちどれですか？
+
+ 
+
+1.        loc = new Locale("de", "DE")
+
+2.        loc = Locale.GERMAN;
+
+3.        loc = Locale.getDefault();
+
+4.        loc = new Locale.Builder()
+
+.setLanguage("de")
+
+.setRegion("DE")
+
+.build();
+
+ 
+
+ 
